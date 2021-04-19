@@ -1,18 +1,39 @@
-
+#include <string>
+#include <map>
 #include <iostream>
+
+using namespace std;
+
+map<char, int> BuildCharContainer(string s) {
+    map<char, int> res;
+    for (char& c : s) {
+        if (res.count(c) == 0)
+            res.insert({ c, 1 });
+        else
+            res.find(c)->second += 1;
+    }
+    return res;
+}
+
+bool Annagram(string first, string second) { 
+    if (BuildCharContainer(first) == BuildCharContainer(second))
+        return true;
+    else
+        return false;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    int N;
+    string first, second;
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        cin >> first >> second;
+        if (Annagram(first, second))
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
+    }
+
+
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
